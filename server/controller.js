@@ -1,3 +1,6 @@
+let goals = []
+let goalId = 0
+
 module.exports = {
 
     getCompliment: (req, res) => {
@@ -22,5 +25,18 @@ module.exports = {
         let randomFortune = fortunes[randomIndex]
         res.status(200).send(randomFortune)
     },
+
+    addGoal: (req, res) => {
+        const { goal, goalAchieve } = req.body
+        const newGoal = {
+            goalId,
+            goal,
+            goalAchieve
+        }
+        goals.push(newGoal)
+        goalId++
+        res.status(200).send(goals)
+    },
+
 
 }
