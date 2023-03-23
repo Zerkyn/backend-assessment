@@ -26,6 +26,10 @@ module.exports = {
         res.status(200).send(randomFortune)
     },
 
+    getGoals: (req, res) => {
+        res.status(200).send(goals)
+    },
+
     addGoal: (req, res) => {
         const { goal, goalAchieve } = req.body
         const newGoal = {
@@ -38,5 +42,26 @@ module.exports = {
         res.status(200).send(goals)
     },
 
+    updateGoals: (req,res) => {
+        const {id} = req.params
+        const{editedGoal} = req.body   
+        for(let i = 0; i < goals.length; i++){           
+            if(goals[i].goalId == id){
+                goals[i].goalAchieve = editedGoal
+            }
+        }
+        res.status(200).send(goals)
+
+    },
+
+    deleteGoal: (req, res) => {
+        const {id} = req.params
+        for(let i = 0; i < goals.length; i++){
+            if(goals[i].goalId == id){
+                goals.splice(i, 1)
+                res.status(200).send(goals)
+            }
+        }
+    }
 
 }
